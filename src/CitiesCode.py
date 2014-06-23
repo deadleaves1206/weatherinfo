@@ -57,13 +57,4 @@ def add_childNode(dom, parentNode, childNode):
 	node.setAttribute('name', childNode['name'])
 	parentNode.appendChild(node)
 
-#test main
-dom = read_XML('..\\xml\\test.xml')
-root = dom.documentElement
-node = {
-	'type':'province',
-	'id':'03',
-	'name':'河北'
-}
-add_childNode(dom, root, node)
-write_XML(dom, '..\\xml\\test_w.xml')
+def 
