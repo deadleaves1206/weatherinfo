@@ -1,8 +1,9 @@
+#-*- coding: utf-8 -*-
 ################################
 ###		author:ryli			 ###
 ###		date:2014-06-16		 ###
 ###		weatherinfo			 ###
-###		citiescode.py		 ###
+###		CitiesCode.py		 ###
 ################################
 
 #get cities' code from China weather
@@ -57,4 +58,6 @@ def add_childNode(dom, parentNode, childNode):
 	node.setAttribute('name', childNode['name'])
 	parentNode.appendChild(node)
 
-def 
+#delete a childnode
+def del_childNode(dom, parentNode, childNode):
+	node = 
