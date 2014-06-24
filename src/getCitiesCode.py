@@ -6,7 +6,7 @@
 ###		getCitiesCode.py	 ###
 ################################
 
-#从中国天气网获取城市代码
+#模块功能：从中国天气网获取城市代码
 
 import urllib2
 import codecs
@@ -56,7 +56,7 @@ def getAreaCode(cityCode):
 		else:
 			return areas
 
-
+#测试代码，用于测试该模块所有功能是否正常
 if __name__ == '__main__':
 	import sys
 	provinces = getProCode()

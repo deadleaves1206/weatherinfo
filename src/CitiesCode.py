@@ -6,58 +6,11 @@
 ###		CitiesCode.py		 ###
 ################################
 
-#get cities' code from China weather
+#模块功能：将城市代码写入xml中
+#version：1.0
+#将原本使用的dom模块改为ElementTree模块
+#dom模块需要将dom树存入内存中，比较消耗内存，效率比较低
+#ElementTree是一种更友好的API，可以提供“在空中”的方式处理xml，内存占用较小，效率较高
+#注：ElementTree对于恶意数据结构数据不能较好的处理
 
-
-#import modules
-from xml.dom import minidom
-
-#read a dom tree form the xml named CitiesCode.xml
-def read_XML(xmlurl):
-	try:
-		dom = minidom.parse(xmlurl)
-	except IOError:
-		print "Can't open the xml file!"
-		return None
-	else:
-		print "Read the dom from the xml file successful!"
-		return dom
-
-#write the dom tree into the xml named CitiesCode.xml
-def write_XML(dom, xmlurl):
-	try:
-		f = open(xmlurl, 'w')
-	except IOError:
-		print "Can't open the xml file!"
-		return None
-	else:
-		print "Open the xml file successful!"
-		try:
-			dom.writexml(f, addindent='    ', newl='\n', encoding='utf-8')
-		except IOError:
-			print "Can't write the information into the xml file!"
-			f.close()
-			return None
-		else:
-			print "Write the information into the xml file successful!"
-			f.close()
-
-#search the node from dom tree by tag name
-def search_childNode(parentNode, childName):
-	childNodes=parentNode.getElementsByTagName(childName)
-	if childNodes==None:
-		print "There is no childnode of %s" %parentNode
-		raise NameError
-	else:
-		return childNodes
-
-#add a childnode
-def add_childNode(dom, parentNode, childNode):
-	node = dom.createElement(childNode['type'])
-	node.setAttribute('id', childNode['id'])
-	node.setAttribute('name', childNode['name'])
-	parentNode.appendChild(node)
-
-#delete a childnode
-def del_childNode(dom, parentNode, childNode):
-	node = 
+#模块导入
