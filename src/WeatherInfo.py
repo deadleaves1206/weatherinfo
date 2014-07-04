@@ -11,17 +11,32 @@
 
 import urllib2
 import json
+import codecs
+import sys
+import re
+import CitiesCode
 
-cityCode = '010102'
+cityname = raw_input(u"请输入所要查询地区：")
+type = sys.getfilesystemencoding()
+cityname = cityname.decode(type)
+dom = CitiesCode.readXML('..\\xml\\CitiesCode.xml')
+cityCode = CitiesCode.searchXML(cityname, dom)
+pattern = re.compile(r'^0[0-4]')
+match = pattern.match(cityCode)
+if match:
+	str1 = cityCode[0:2]
+	str2 = cityCode[4:6]
+	cityCode = str1 + str2 + '00'
+	
 if cityCode:
 	try:
-		url = ('http://www.weather.com.cn/data/cityinfo/1%s00.html' %cityCode)
+		url = ('http://www.weather.com.cn/data/cityinfo/101%s.html' %cityCode)
 		content = urllib2.urlopen(url).read()
 		data = json.loads(content)
 		result = data['weatherinfo']
 		str_temp = ('%s\n%s ~ %s') % (	result['weather'],
-										result['temp1'],
-										result['temp2'])
+										result['temp2'],
+										result['temp1'])
 		print str_temp
 	except:
 		print '查询失败'

@@ -14,11 +14,34 @@ from xml.dom import minidom				#dom模块，用于读写xml文件
 import getCitiesCode					#获取城市代码
 #import codecs							#文件、字符编码
 
+
+#解析XML文件，从中分析出城市代码
 def readXML(in_path):
 	'读取xml文件，返回dom树'
-	dom = minidom.parse(in_path)
-	return dom
+	try:
+		dom = minidom.parse(in_path)
+		return dom
+	except IOError:
+		print "Can't open the xml file!"
+		return None
 
+def searchXML(cityname, dom):
+	try:
+		citiesnode = dom.getElementsByTagName(u'area')
+		if citiesnode == None:
+			raise NameError
+	except NameError:
+		print "Can't read the information from the xml file!"
+		return None
+	else:
+		for citynode in citiesnode:
+			id = citynode.getAttribute('id')
+			name = citynode.getAttribute('name')
+			if name == cityname:
+				return id
+	return None
+
+#将城市代码写入XML文件中
 def writeXML(dom, out_path):
 	'将dom树写入xml文件中'
 #	f = codecs.open(out_path, 'w', encoding='utf-8')
@@ -58,5 +81,6 @@ def citiesCode():
 
 #测试代码，用于测试该模块所有功能是否正常
 if __name__ == '__main__':
-	citiesCode()
-
+	dom = readXML('..\\xml\\CitiesCode.xml')
+	citycode = searchXML('area', u'北京', dom)
+	print citycode
