@@ -6,7 +6,7 @@
 ###		WeatherInfo.py		 ###
 ################################
 
-#version:0.1
+#version:1.0
 
 
 import urllib2
@@ -15,10 +15,16 @@ import codecs
 import sys
 import re
 import CitiesCode
+import getIPInfo
 
-cityname = raw_input(u"请输入所要查询地区：")
-type = sys.getfilesystemencoding()
-cityname = cityname.decode(type)
+# cityname = raw_input(u"请输入所要查询地区：")
+# type = sys.getfilesystemencoding()
+# cityname = cityname.decode(type)
+IP = getIPInfo.getMyIP().getIP()
+if IP == None:
+	print "Can't get the IP"
+else:
+	cityname = getIPInfo.getLocation(IP)
 dom = CitiesCode.readXML('..\\xml\\CitiesCode.xml')
 cityCode = CitiesCode.searchXML(cityname, dom)
 pattern = re.compile(r'^0[0-4]')
